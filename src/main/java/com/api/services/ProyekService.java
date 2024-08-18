@@ -20,6 +20,9 @@ public class ProyekService {
 
     // Metode untuk membuat Proyek dari entity Proyek
     public Proyek createProyek(Proyek proyek) {
+        if (proyek.getCreatedAt() == null) {
+            proyek.setCreatedAt(LocalDateTime.now());
+        }
         return proyekRepo.save(proyek);
     }
     public Proyek getProyekById(Integer id) {

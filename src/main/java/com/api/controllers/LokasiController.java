@@ -78,4 +78,17 @@ public class LokasiController {
         response.put("message", "Lokasi berhasil dihapus");
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/find")
+    public ResponseEntity<Map<String, Object>> findLokasi(@RequestParam Integer id) {
+        Lokasi lokasi = lokasiServices.findOne(id);
+        if (lokasi == null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Lokasi tidak ditemukan");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Lokasi berhasil ditemukan");
+        response.put("data", lokasi);
+        return ResponseEntity.ok(response);
+    }
 }

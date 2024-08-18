@@ -88,4 +88,19 @@ public class ProyekController {
     return ResponseEntity.ok(response);
 }
 
+@GetMapping("/find")
+public ResponseEntity<Map<String, Object>> findOne(@RequestParam Integer id) {
+    Proyek proyek = proyekService.findOne(id);
+    if (proyek == null) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Proyek tidak ditemukan");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+    Map<String, Object> response = new HashMap<>();
+    response.put("message", "Proyek berhasil ditemukan");
+    response.put("data", proyek);
+    return ResponseEntity.ok(response);
+
+}
+
 }
